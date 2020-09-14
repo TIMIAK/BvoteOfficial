@@ -21,6 +21,7 @@ Route::get('/submit/poll','GuestController@submit');
 Route::get('/home', 'GuestController@index')->name('home');
 Route::middleware('auth')->group(function(){
     Route::get('/admin/profile/{id}/','UserController@profile')->name('admin.profile');
+    Route::get('/admin/polls/{id}/','UserController@polls')->name('admin.polls');
 });
 
 Auth::routes();

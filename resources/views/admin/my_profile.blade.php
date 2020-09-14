@@ -8,9 +8,10 @@
       </div>
       <div class="col">
         <form action="">
+            @csrf
             <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" class="form-control" id="name" placeholder="E.g Tim Baron" value="{{$user->name}}">
+                <label for="name">Name:</label>
+                <input type="text" name="name" class="form-control" id="name" placeholder="E.g Tim Baron" value="{{$user->name}}">
             </div>
 
         </form>
