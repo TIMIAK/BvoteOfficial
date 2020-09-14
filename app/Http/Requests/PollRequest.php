@@ -29,6 +29,8 @@ class PollRequest extends FormRequest
             'candidates' => 'required',
             'start_date' => 'required|date|after:yesterday',
             'end_date' => 'required|date|after_or_equal:start_date',
+            'start_time' => 'required',
+            'end_time' => 'required|after:start_time',
 
 
         ];
@@ -36,8 +38,14 @@ class PollRequest extends FormRequest
     public function messages()
     {
         return [
+            'office.required' => "Office Field is required",
+            'office.max' => "Office field can't me more that 250 characters",
+            'candidates' => "Candidate field is required",
             'start_date.after' => "Start Date MUST be Today onward ",
             'end_date:after' => "End Date MUST be after the start date",
+
+            'start_time.required' => "Start Time is Required",
+            'end_date:after' => "End Time MUST be after the start Time",
         ];
     }
 }

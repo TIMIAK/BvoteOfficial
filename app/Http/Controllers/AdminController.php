@@ -42,7 +42,8 @@ class AdminController extends Controller
     public function store(PollRequest $request)
     {
         //
-        return $request;
+        Auth()->user()->polls()->create($request->all());
+        return redirect()->back()->with('success','Poll created successfully');
     }
 
     /**

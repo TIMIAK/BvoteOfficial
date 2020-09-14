@@ -7,17 +7,17 @@
         </div>
     @endforeach
 @endif
-{{-- @if ('error')
+@if (session()->has('error'))
     <div class="alert alert-danger">
         <ul>
-            <li>{{$error}}</li>
+            <li>{{session('error')}}</li>
         </ul>
     </div>
 @endif
-@if ('success')
-    <div class="alert alert-danger">
+@if (session()->has('success'))
+    <div class="alert alert-success">
         <ul>
-            <li>{{$error}}</li>
+            <li>{{session('success')}}</li>
         </ul>
     </div>
-@endif --}}
+@endif
