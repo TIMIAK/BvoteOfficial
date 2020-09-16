@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PollRequest;
+use App\Polls;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AdminController extends Controller
 {
@@ -19,7 +22,8 @@ class AdminController extends Controller
     public function index()
     {
         //
-        return 1235;
+        $polls = Polls::all();
+        return view('admin.my_polls',compact('polls'));
     }
 
     /**
@@ -55,6 +59,13 @@ class AdminController extends Controller
     public function show($id)
     {
         //
+        $poll = Polls::find($id);
+        if($poll){
+
+            return view('admin.edit_poll',compact('poll'));
+        }
+        return Redirect::route('home');
+        // dd($id);
     }
 
     /**
@@ -75,9 +86,12 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PollRequest $request, $id)
     {
         //
+        $poll = Polls::find($id);
+        $poll->update($request->all());
+        return redirect(route('poll.index',$id))->with('success','Poll Updated Successfully');
     }
 
     /**
@@ -89,6 +103,10 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+        $poll = Polls::find($id);
+        $poll->delete();
+        return redirect()->back()->with('success','Poll Deleted!');
     }
+
 
 }

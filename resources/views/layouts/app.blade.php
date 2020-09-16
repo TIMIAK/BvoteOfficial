@@ -47,7 +47,7 @@
                             <a href="/services" class="nav-link">Service</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('admin.create')}}" class="nav-link">Create Poll</a>
+                            <a href="{{route('poll.create')}}" class="nav-link">Create Poll</a>
                         </li>
                         <li class="nav-item">
                             <a href="/submit/poll" class="nav-link">Submit Poll</a>
@@ -75,8 +75,8 @@
 
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{route('admin.profile',Auth()->user()->id)}}">My Profile</a>
-                                    <a class="dropdown-item" href="{{route('admin.polls',Auth()->user()->id)}}">My Polls</a>
+                                    <a class="dropdown-item" href="{{route('admin.profile')}}">My Profile</a>
+                                    <a class="dropdown-item" href="{{route('poll.index')}}">My Polls</a>
                                     <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
@@ -96,8 +96,10 @@
         </nav>
 
         <main class="py-4">
-            @include('messages.flash')
-            @yield('content')
+            <div class="container">
+                @include('messages.flash')
+                @yield('content')
+            </div>
         </main>
     </div>
     <script src="{{asset('js/jquery.min.js')}}"></script>

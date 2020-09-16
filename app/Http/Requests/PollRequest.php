@@ -30,7 +30,7 @@ class PollRequest extends FormRequest
             'start_date' => 'required|date|after:yesterday',
             'end_date' => 'required|date|after_or_equal:start_date',
             'start_time' => 'required',
-            'end_time' => 'required|after:start_time',
+            'end_time' => 'required',
 
 
         ];
@@ -45,7 +45,7 @@ class PollRequest extends FormRequest
             'end_date:after' => "End Date MUST be after the start date",
 
             'start_time.required' => "Start Time is Required",
-            'end_date:after' => "End Time MUST be after the start Time",
+            'end_time:required' => "End Time is Required",
         ];
     }
 }

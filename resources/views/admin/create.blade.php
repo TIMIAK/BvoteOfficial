@@ -6,9 +6,9 @@
 
       </div>
       <div class="col">
-        <form action="{{route('admin.store')}}" method="post">
+        <form action="{{route('poll.store')}}" method="post">
             @csrf
-            
+
             <div class="form-group">
                 <label for="office">Office:</label>
                 <input type="text" name="office" class="form-control" id="office" placeholder="E.g Class Govenor">
