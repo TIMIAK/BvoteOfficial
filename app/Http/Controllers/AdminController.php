@@ -22,10 +22,10 @@ class AdminController extends Controller
     public function index()
     {
         //
-        $polls = Polls::all();
+        $polls = Polls::all()->sortBy('created_at');
         return view('admin.my_polls',compact('polls'));
-    }
 
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -45,8 +45,9 @@ class AdminController extends Controller
      */
     public function store(PollRequest $request)
     {
-        //
         Auth()->user()->polls()->create($request->all());
+
+
         return redirect()->back()->with('success','Poll created successfully');
     }
 

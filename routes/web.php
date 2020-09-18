@@ -21,12 +21,9 @@ Route::group(['prefix' => 'admin/'], function () {
 
 Route::get('/about','GuestController@about');
 Route::get('/services','GuestController@services');
-Route::get('/submit/poll','GuestController@submit');
 Route::get('/home', 'GuestController@index')->name('home');
-// Route::middleware('auth')->group(function(){
-//     Route::get('/admin/profile/{id}/','UserController@profile')->name('admin.profile');
-//     Route::get('/admin/polls/','UserController@polls')->name('admin.polls');
-//     Route::get('/admin/polls/delete/{id}/','UserController@deletepoll')->name('admin.deletepoll');
-// });
+Route::middleware('auth')->group(function(){
+    Route::get('/submit/poll','GuestController@submit');
+});
 
 Auth::routes();

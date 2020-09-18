@@ -19,6 +19,19 @@
                         <?php
                         $candidates = $poll->candidates;
                         $exploded_candidates =  explode(',',$candidates);
+
+                        // Vote interval to start
+                        $current_date =  date_create(date('Y-m-d'));
+                        $start_date  = date_create($poll->start_date);
+                        $diff_to_start = date_diff($current_date,$start_date);
+                        $interval_to_start =  $diff_to_start->format("%R%a day(s)");
+                        echo $poll->office;
+                        // Vote interval to end
+                        $start_date = date_create($request->start_date);
+                        $end_date = date_create($request->end_date);
+                        $diff_to_end = date_diff($start_date,$end_date);
+                        $interval_to_end = $diff_to_end->format("%R%a day(s)");
+
                         ?>
                         {{-- {{$explode}} --}}
                         {{-- {{$exploded_candidates}} --}}
@@ -30,10 +43,14 @@
                         </ul>
                     </p>
                         <hr>
+                            <span>{{$interval_to_start . " Left to Start. "}}</span><br>
+                            <span>{{$interval_to_end . " Left to End. "}}</span><br>
+
+                        <hr>
                         {{-- {{$collection = Str::of('foo bar baz')->explode(' ');}}
                         {{dd($collection)}} --}}
                     <div>
-                        <a href="{{route('poll.show',$poll->id)}}" class="card-link">Edit Poll</a>
+                        <a href="{{route('poll.show',$poll->id)}}" class="card-link">Edssit Poll</a>
                         <a href="#" class="card-link" onclick="event.preventDefault();
                             if(confirm('Are you Sure?')){
                                 document.getElementById('poll-delete-{{$poll->id}}').submit()}"
