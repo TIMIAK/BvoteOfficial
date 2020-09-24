@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PollRequest;
 use App\Polls;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -22,7 +23,7 @@ class AdminController extends Controller
     public function index()
     {
         //
-        $polls = Polls::all()->sortBy('created_at');
+        $polls = Auth::user()->polls->sortBy('created_at');
         return view('admin.my_polls',compact('polls'));
 
     }

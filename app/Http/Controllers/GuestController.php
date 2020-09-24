@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PollSearchRequest;
+use App\Http\Requests\ResultRequest;
 use App\Polls;
+use App\Result;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class GuestController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //
     public function index(){
         return view('guest.home');
@@ -33,5 +40,12 @@ class GuestController extends Controller
         else{
             return view('guest.submit_poll',compact('polldetail'));
         }
+    }
+    public function submitResult(ResultRequest $request,$poll_id){
+        $request['poll_id'] = $poll_id;
+        $request['user_id'] = Auth::user()->id;
+        Result::create($request->all());
+        return redirect('/poll/search')->with('success','Your Candidate has been submitted successfully!!! ');
+        // return $request;
     }
 }

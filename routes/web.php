@@ -22,9 +22,11 @@ Route::group(['prefix' => 'admin/'], function () {
 Route::get('/about','GuestController@about');
 Route::get('/services','GuestController@services');
 Route::get('/home', 'GuestController@index')->name('home');
-Route::middleware('auth')->group(function(){
-    Route::get('/poll/search','GuestController@pollSearch')->name('poll.search');
-    Route::get('/poll/submitSearch/','GuestController@submitSearch')->name('submit.search');
+
+Route::group(['prefix' => 'poll/'], function () {
+    Route::get('search','GuestController@pollSearch')->name('poll.search');
+    Route::get('submit/Search/','GuestController@submitSearch')->name('submit.search');
+    Route::get('submit/{poll_id}/Result','GuestController@submitResult')->name('submit.result');
 });
 
 Auth::routes();
