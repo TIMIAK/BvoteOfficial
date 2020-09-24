@@ -50,7 +50,7 @@
                             <a href="{{route('poll.create')}}" class="nav-link">Create Poll</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/submit/poll" class="nav-link">Submit Poll</a>
+                            <a href="{{route('poll.search')}}" class="nav-link">Submit Poll</a>
                         </li>
                     </ul>
 

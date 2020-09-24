@@ -23,7 +23,8 @@ Route::get('/about','GuestController@about');
 Route::get('/services','GuestController@services');
 Route::get('/home', 'GuestController@index')->name('home');
 Route::middleware('auth')->group(function(){
-    Route::get('/submit/poll','GuestController@submit');
+    Route::get('/poll/search','GuestController@pollSearch')->name('poll.search');
+    Route::get('/poll/submitSearch/','GuestController@submitSearch')->name('submit.search');
 });
 
 Auth::routes();

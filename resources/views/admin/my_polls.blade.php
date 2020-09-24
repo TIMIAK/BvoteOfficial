@@ -19,22 +19,7 @@
                         <?php
                         $candidates = $poll->candidates;
                         $exploded_candidates =  explode(',',$candidates);
-
-                        // Vote interval to start
-                        $current_date =  date_create(date('Y-m-d'));
-                        $start_date  = date_create($poll->start_date);
-                        $diff_to_start = date_diff($current_date,$start_date);
-                        $interval_to_start =  $diff_to_start->format("%R%a day(s)");
-                        echo $poll->office;
-                        // Vote interval to end
-                        $start_date = date_create($request->start_date);
-                        $end_date = date_create($request->end_date);
-                        $diff_to_end = date_diff($start_date,$end_date);
-                        $interval_to_end = $diff_to_end->format("%R%a day(s)");
-
                         ?>
-                        {{-- {{$explode}} --}}
-                        {{-- {{$exploded_candidates}} --}}
                         <ul>
 
                         @foreach ($exploded_candidates as $exploded_candidate)
@@ -43,8 +28,12 @@
                         </ul>
                     </p>
                         <hr>
-                            <span>{{$interval_to_start . " Left to Start. "}}</span><br>
-                            <span>{{$interval_to_end . " Left to End. "}}</span><br>
+                        <div>
+                            <span>{{"Poll ID: ". $poll->voteid }}</span>
+                        </div>
+                        <div>
+                            <span>{{"Status: ".$poll->status}}</span><br>
+                        </div>
 
                         <hr>
                         {{-- {{$collection = Str::of('foo bar baz')->explode(' ');}}
@@ -71,5 +60,5 @@
 
         @endif
         </div>
-    </div>
+</div>
 @endsection

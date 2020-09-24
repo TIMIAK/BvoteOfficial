@@ -45,8 +45,17 @@ class AdminController extends Controller
      */
     public function store(PollRequest $request)
     {
+        // dd(date("h:i:s")->addHour(1));
+        // if($request->start_date >= Date('Y-m-d')){
+        //     $request['status'] = "Running";
+        // }
+        // else{
+        //     $request['status'] = "Pending";
+        // }
+        $voteid = 'BV'.rand(100,999);
+        $request['voteid'] = $voteid;
         Auth()->user()->polls()->create($request->all());
-
+        // dd($request->status);
 
         return redirect()->back()->with('success','Poll created successfully');
     }

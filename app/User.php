@@ -39,4 +39,7 @@ class User extends Authenticatable
     public function polls(){
         return $this->hasMany(Polls::class);
     }
+    public function roles(){
+        return $this->belongsToMany(roles::class);
+    }
 }

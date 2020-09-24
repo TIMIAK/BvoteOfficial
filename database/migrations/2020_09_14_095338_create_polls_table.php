@@ -17,12 +17,14 @@ class CreatePollsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->string('voteid')->unique();
             $table->string('office');
             $table->string('candidates');
             $table->date('start_date');
             $table->date('end_date');
             $table->time('start_time');
             $table->time('end_time');
+            // $table->string('status')->default(null);
             $table->timestamps();
         });
     }
