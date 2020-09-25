@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PollRequest;
+use App\Http\Requests\PollSearchRequest;
+use App\Http\Requests\ResultRequest;
 use App\Polls;
+use App\Result;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +26,7 @@ class AdminController extends Controller
     }
     public function index()
     {
-        $polls = Auth::user()->polls->sortBy('created_at');
+        $polls = Auth::user()->polls->sortByDesc('created_at');
         return view('admin.my_polls',compact('polls'));
 
     }
@@ -35,6 +38,9 @@ class AdminController extends Controller
     public function create()
     {
         return view('admin.create');
+    }
+    public function pollSearch(){
+        return view('admin.submit_search');
     }
 
     /**
@@ -49,7 +55,7 @@ class AdminController extends Controller
         $request['voteid'] = $voteid;
         Auth()->user()->polls()->create($request->all());
 
-        return redirect()->back()->with('success','Poll created successfully');
+        return redirect(route('poll.index'))->with('success','Poll created successfully');
     }
 
     /**
@@ -109,6 +115,31 @@ class AdminController extends Controller
         $results = DB::table('results')->where('poll_id',$poll_id)->get();
         $poll_detail = DB::table('polls')->where('id',$poll_id)->first();
         return view('admin.Result',compact('results','poll_detail'));
+    }
+    public function submitResult(ResultRequest $request,$poll_id){
+        $request['poll_id'] = $poll_id;
+        $request['user_id'] = Auth::user()->id;
+        Result::create($request->all());
+        return redirect(route('poll.search'))->with('success','Your Candidate has been submitted successfully!!! ');
+    }
+    public function submitSearch(PollSearchRequest $request)
+    {
+
+        $vote_id = DB::table('polls')->where('voteid',$request->voteid)->value('id');
+        $polldetail = DB::table('polls')->where('voteid',$request->voteid)->first();
+        if($polldetail == ''){
+            return redirect()->back()->with('error','Unable to Find this Poll with ID '. $request->voteid);
+        }
+        $check_eligiblilty = DB::table('results')->where([
+            ['poll_id', '=' ,$vote_id],
+            ['user_id','=',Auth::user()->id],
+        ])->first();
+        if($check_eligiblilty == ''){
+            return view('admin.submit_poll',compact('polldetail'));
+        }
+        else{
+            return redirect()->back()->with('error','You Have Already Completed this Poll!!!');
+        }
     }
 
 

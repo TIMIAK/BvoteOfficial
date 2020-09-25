@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="row justify-content-center">
-        <div class="col col-md-8 pt-5">
+        <div class="col col-md-8 pt-5"> 
         <form class="form-inline" action="{{route('submit.search')}}" method="GET">
                 <div class="form-group mb-2">
                     {{-- <label for="inputVoteId">Vote ID</label> --}}

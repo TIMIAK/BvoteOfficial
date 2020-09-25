@@ -26,32 +26,7 @@ class GuestController extends Controller
     public function services(){
         return view('guest.services');
     }
-    public function pollSearch(){
-        return view('guest.submit_search');
-    }
-    public function submitSearch(PollSearchRequest $request)
-    {
+    
 
-        $vote_id = DB::table('polls')->where('voteid',$request->voteid)->value('id');
-        $polldetail = DB::table('polls')->where('voteid',$request->voteid)->first();
-        if($polldetail == ''){
-            return redirect()->back()->with('error','Unable to Find this Poll with ID '. $request->voteid);
-        }
-        $check_eligiblilty = DB::table('results')->where([
-            ['poll_id', '=' ,$vote_id],
-            ['user_id','=',Auth::user()->id],
-        ])->first();
-        if($check_eligiblilty == ''){
-            return view('guest.submit_poll',compact('polldetail'));
-        }
-        else{
-            return redirect()->back()->with('error','You Have Already Completed this Poll!!!');
-        }
-    }
-    public function submitResult(ResultRequest $request,$poll_id){
-        $request['poll_id'] = $poll_id;
-        $request['user_id'] = Auth::user()->id;
-        Result::create($request->all());
-        return redirect('/poll/search')->with('success','Your Candidate has been submitted successfully!!! ');
-    }
+
 }
