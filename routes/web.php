@@ -17,6 +17,7 @@ Route::get('/','GuestController@index')->name('home');
 Route::group(['prefix' => 'admin/'], function () {
     Route::resource('poll', 'AdminController');
     Route::get('','UserController@profile')->name('admin.profile');
+    Route::get('view/{poll_id}/Result','AdminController@viewResult')->name('view.result');
 });
 
 Route::get('/about','GuestController@about');
@@ -26,7 +27,8 @@ Route::get('/home', 'GuestController@index')->name('home');
 Route::group(['prefix' => 'poll/'], function () {
     Route::get('search','GuestController@pollSearch')->name('poll.search');
     Route::get('submit/Search/','GuestController@submitSearch')->name('submit.search');
-    Route::get('submit/{poll_id}/Result','GuestController@submitResult')->name('submit.result');
+    Route::get('submit/{poll_id}/result/','GuestController@submitResult')->name('submit.result');
+
 });
 
 Auth::routes();

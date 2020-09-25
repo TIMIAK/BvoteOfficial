@@ -34,12 +34,15 @@
                         <div>
                             <span>{{"Status: ".$poll->status}}</span><br>
                         </div>
+                        <div>
+                            <span>Result: </span> <a href="{{route('view.result',$poll->id)}}" class="btn btn-sm btn-primary">VIEW</a>
+                        </div>
 
                         <hr>
                         {{-- {{$collection = Str::of('foo bar baz')->explode(' ');}}
                         {{dd($collection)}} --}}
                     <div>
-                        <a href="{{route('poll.show',$poll->id)}}" class="card-link">Edssit Poll</a>
+                        <a href="{{route('poll.show',$poll->id)}}" class="card-link">Edit Poll</a>
                         <a href="#" class="card-link" onclick="event.preventDefault();
                             if(confirm('Are you Sure?')){
                                 document.getElementById('poll-delete-{{$poll->id}}').submit()}"
