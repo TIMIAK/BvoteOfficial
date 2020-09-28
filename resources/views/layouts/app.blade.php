@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'BVOTE') }}</title>
+    <title>BVOTE</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -23,12 +23,12 @@
     <link href="{{asset('css/icons.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body class="background-image">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'BVOTE') }}
+                    BVOTE
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -39,12 +39,6 @@
                     <ul class="navbar-nav mr-auto sticky-top">
                         <li class="nav-item">
                             <a href="/home" class="nav-link">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/about" class="nav-link">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/services" class="nav-link">Service</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('poll.create')}}" class="nav-link">Create Poll</a>
@@ -69,7 +63,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {{ Auth::user()->username }}
 
                                 </a>
 

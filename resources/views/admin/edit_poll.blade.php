@@ -11,7 +11,7 @@
                 @csrf
                 @method('patch')
                 <div class="form-group">
-                    <label for="office">Office:w</label>
+                    <label for="office">Office:</label>
                     <input type="text" name="office" class="form-control" id="office" placeholder="E.g Class Govenor" value="{{$poll->office}}">
                 </div>
                 <div class="form-group">

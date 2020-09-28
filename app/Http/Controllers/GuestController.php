@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\DB;
 
 class GuestController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    //
     public function index(){
         return view('guest.home');
     }
@@ -26,7 +21,4 @@ class GuestController extends Controller
     public function services(){
         return view('guest.services');
     }
-    
-
-
 }
