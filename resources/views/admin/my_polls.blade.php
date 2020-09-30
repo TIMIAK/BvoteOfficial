@@ -19,6 +19,8 @@
                         <?php
                         $candidates = $poll->candidates;
                         $exploded_candidates =  explode(',',$candidates);
+                        $poll['status'] = '';
+                        $time =  time() + 60*60;
                         ?>
                         <ul>
 
@@ -32,6 +34,7 @@
                             <span>{{"Poll ID: ". $poll->voteid }}</span>
                         </div>
                         <div>
+                            @include('admin.checkstatus')
                             <span>{{"Status: ".$poll->status}}</span><br>
                         </div>
                         <div>

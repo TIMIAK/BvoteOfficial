@@ -130,15 +130,46 @@ class AdminController extends Controller
         if($polldetail == ''){
             return redirect()->back()->with('error','Unable to Find this Poll with ID '. $request->voteid);
         }
-        $check_eligiblilty = DB::table('results')->where([
-            ['poll_id', '=' ,$vote_id],
-            ['user_id','=',Auth::user()->id],
-        ])->first();
-        if($check_eligiblilty == ''){
-            return view('admin.submit_poll',compact('polldetail'));
+        $time =  time() + 60*60;
+        if($polldetail->end_date  <= date('Y-m-d')){
+            if($polldetail->end_time < date('H:i',$time)){
+                return redirect()->back()->with('error','This Poll Has ended');
+            }
+            else{
+                $check_eligiblilty = DB::table('results')->where([
+                    ['poll_id', '=' ,$vote_id],
+                    ['user_id','=',Auth::user()->id],
+                ])->first();
+                if($check_eligiblilty == ''){
+                    return view('admin.submit_poll',compact('polldetail'));
+                }
+                else{
+                    return redirect()->back()->with('error','You Have Already Completed this Poll!!!');
+                }
+            }
+        }
+        if($polldetail->start_date  >= date('Y-m-d')){
+            if($polldetail->start_time < date('H:i',$time)){
+                $check_eligiblilty = DB::table('results')->where([
+                    ['poll_id', '=' ,$vote_id],
+                    ['user_id','=',Auth::user()->id],
+                ])->first();
+                if($check_eligiblilty == ''){
+                    return view('admin.submit_poll',compact('polldetail'));
+                }
+                else{
+                    return redirect()->back()->with('error','You Have Already Completed this Poll!!!');
+                }
+            }
+
+            else{
+                return redirect()->back()->with('error','This Poll is yet to start. Please try again later');
+
+            }
         }
         else{
-            return redirect()->back()->with('error','You Have Already Completed this Poll!!!');
+            return redirect()->back()->with('error','This Poll is yet to start. Please try again later');
+
         }
     }
 
