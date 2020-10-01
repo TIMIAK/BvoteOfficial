@@ -131,8 +131,8 @@ class AdminController extends Controller
             return redirect()->back()->with('error','Unable to Find this Poll with ID '. $request->voteid);
         }
         $time =  time() + 60*60;
-        if($polldetail->end_date  <= date('Y-m-d')){
-            if($polldetail->end_time < date('H:i',$time)){
+        if(date('Y-m-d') >= $polldetail->end_date){
+            if(date('H:i',$time) > $polldetail->end_time){
                 return redirect()->back()->with('error','This Poll Has ended');
             }
             else{
@@ -148,8 +148,8 @@ class AdminController extends Controller
                 }
             }
         }
-        if($polldetail->start_date  >= date('Y-m-d')){
-            if($polldetail->start_time < date('H:i',$time)){
+        elseif( date('Y-m-d') >= $polldetail->start_date){
+            if(date('H:i',$time) >= $polldetail->start_time){
                 $check_eligiblilty = DB::table('results')->where([
                     ['poll_id', '=' ,$vote_id],
                     ['user_id','=',Auth::user()->id],
