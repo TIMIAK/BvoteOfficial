@@ -10,7 +10,11 @@
     <title>BVOTE</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{asset('js/jquery.min.js')}}"></script>
+     --}}
+
+
 
     <!-- Fonts -->
     {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -22,6 +26,7 @@
     <link href="{{asset('css/metismenu.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/icons.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/jquery.steps.css')}}">
 </head>
 <body class="background-image">
     <div id="app">
@@ -96,11 +101,18 @@
             </div>
         </main>
     </div>
+    <div class="row justify-content-center">
+        <footer>
+            &copy; 2020 Created with <i class="mdi mdi-heart text-danger"></i> by <a href="https://github.com/TIMIAK" target="blank">TimBaron</a></span>.
+        </footer>
+    </div>
     <script src="{{asset('js/jquery.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('js/metismenu.min.js')}}"></script>
     <script src="{{asset('js/jquery.slimscroll.js')}}"></script>
     <script src="{{asset('js/waves.min.js')}}"></script>
     <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('js/jquery.steps.min.js')}}"></script>
+    <script src="{{asset('js/form-wizard.init.js')}}"></script>
 </body>
 </html>
